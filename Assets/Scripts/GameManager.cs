@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
 	private void Start () 
     {
         BeginGame();
+        mapCamera.gameObject.SetActive(false);
 	}
 	
 	void Update () 
@@ -25,6 +26,11 @@ public class GameManager : MonoBehaviour {
             bool curState = mapCamera.gameObject.activeSelf;
             mapCamera.gameObject.SetActive(!curState);
         }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            player.throwBall();
+        }
 	}
 
     private void BeginGame()
@@ -38,5 +44,6 @@ public class GameManager : MonoBehaviour {
     {
         StopAllCoroutines();
         BeginGame();
+        player.resetPosition();
     }
 }
