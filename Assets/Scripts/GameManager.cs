@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour {
         playerInstance.transform.localPosition =
             new Vector3(
                 50f,
-                5f,
+                50f,
                 50f
             );
     }
@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour {
     private void RestartGame()
     {
         StopAllCoroutines();
+        Destroy(player);
         BeginGame();
     }
 }

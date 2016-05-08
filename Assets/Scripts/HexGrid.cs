@@ -94,5 +94,23 @@ public class HexGrid : MonoBehaviour
         label.text = cell.coordinates.ToStringOnSeparateLines();
 
         cell.uiRect = label.rectTransform;
+
+        int elevation = Random.Range(0,4);
+        cell.Elevation = elevation;
+        switch(elevation)
+        {
+        case 0:
+            cell.color = Color.blue;
+            break;
+        case 1:
+            cell.color = Color.green;
+            break;
+        case 2:
+            cell.color = Color.gray;
+            break;
+        case 3:
+            cell.color = Color.white;
+            break;
+        }
     }
 }
