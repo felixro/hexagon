@@ -109,10 +109,15 @@ public class HexMesh : MonoBehaviour
         Vector3 v3 = v1 + bridge;
         Vector3 v4 = v2 + bridge;
 
+        v3.y = v4.y = neighbour.Elevation * HexMetrics.elevationStep;
+
         HexCell nextNeighbour = cell.GetNeighbour(direction.Next());
         if (direction <= HexDirection.E && nextNeighbour != null)
         {
-            AddTriangle(v2, v4, v2 + HexMetrics.GetBridge(direction.Next()));
+            Vector3 v5 = v2 + HexMetrics.GetBridge(direction.Next());
+            v5.y = nextNeighbour.Elevation * HexMetrics.elevationStep;
+
+            AddTriangle(v2, v4, v5);
             AddTriangleColor(cell.color, neighbour.color, nextNeighbour.color);
         }
 
