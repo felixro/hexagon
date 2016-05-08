@@ -16,6 +16,8 @@ public class HexGrid : MonoBehaviour
     Canvas gridCanvas;
     HexMesh hexMesh;
 
+    public Color[] heightColor;
+
     void Awake ()
     {
         gridCanvas = GetComponentInChildren<Canvas>();
@@ -95,22 +97,9 @@ public class HexGrid : MonoBehaviour
 
         cell.uiRect = label.rectTransform;
 
-        int elevation = Random.Range(0,4);
+        int elevation = Random.Range(0,6);
         cell.Elevation = elevation;
-        switch(elevation)
-        {
-        case 0:
-            cell.color = Color.blue;
-            break;
-        case 1:
-            cell.color = Color.green;
-            break;
-        case 2:
-            cell.color = Color.gray;
-            break;
-        case 3:
-            cell.color = Color.white;
-            break;
-        }
+
+        cell.color = heightColor[elevation];
     }
 }

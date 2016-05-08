@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour {
     public PlayerController player;
     public Camera mapCamera;
 
+    public HexMapEditor hexMapEditor;
+
 	private void Start () 
     {
         BeginGame();
@@ -13,32 +15,28 @@ public class GameManager : MonoBehaviour {
 	
 	void Update () 
     {
-        if ( Input.GetKeyDown( KeyCode.R ) )
+        if (Input.GetKeyDown(KeyCode.R))
         {
             RestartGame();
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            bool curState = mapCamera.gameObject.activeSelf;
+            mapCamera.gameObject.SetActive(!curState);
         }
 	}
 
     private void BeginGame()
     {
-        mapCamera.rect = new Rect(0f, 0f, 0.5f, 0.5f);
         mapCamera.clearFlags = CameraClearFlags.Skybox;
         mapCamera.clearFlags = CameraClearFlags.Depth;
-
-        PlayerController playerInstance = Instantiate(player) as PlayerController;
-        playerInstance.transform.parent = transform;
-        playerInstance.transform.localPosition =
-            new Vector3(
-                50f,
-                50f,
-                50f
-            );
+        mapCamera.gameObject.SetActive(true);
     }
 
     private void RestartGame()
     {
         StopAllCoroutines();
-        Destroy(player);
         BeginGame();
     }
 }
