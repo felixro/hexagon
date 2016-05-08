@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed = 8.0F;
     public float gravity = 20.0F;
 
+    public int nrOfBalls = 1;
     public int shootForce = 1000;
 
     public GameObject ballPrefab;
@@ -41,14 +42,19 @@ public class PlayerController : MonoBehaviour
 
     public void throwBall()
     {
-        GameObject ball = Instantiate (ballPrefab, transform.position, transform.rotation) as GameObject;
-        Transform ballTransform = ball.transform;
+        for (int i = 0; i < nrOfBalls; i++)
+        {
+            GameObject ball = Instantiate (ballPrefab, transform.position, transform.rotation) as GameObject;
+            Transform ballTransform = ball.transform;
 
-        ballTransform.SetParent(this.transform);
-        ballTransform.localPosition = new Vector3(0f,0f,1f);
-        ballTransform.SetParent(null);
+            Material material = ball.GetComponent<Renderer>().material;
+            material.color = new Color(Random.Range(0.0f,1.0f),Random.Range(0.0f,1.0f),Random.Range(0.0f,1.0f));
 
-        ball.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * shootForce);
+            ballTransform.SetParent(this.transform);
+            ballTransform.localPosition = new Vector3(0f,0f,1f);
+            ballTransform.SetParent(null);
 
+            ball.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * shootForce);   
+        }
     }
 }
